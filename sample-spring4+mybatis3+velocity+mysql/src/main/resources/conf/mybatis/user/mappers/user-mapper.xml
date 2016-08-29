@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aoeai.sample.persistence.UserMapper">
+
+    <resultMap id="userMap" type="com.aoeai.sample.bean.User">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <!-- 插入数据 -->
+    <insert id="addUser" parameterType="com.aoeai.sample.bean.User">
+        <selectKey resultType="int" order="AFTER"
+                   keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO user (name,password)
+        VALUES (#{name},#{password})
+    </insert>
+
+    <!-- 更新数据 -->
+    <update id="updateUser" parameterType="com.aoeai.sample.bean.User">
+        UPDATE user
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 搜索条件 -->
+    <sql id="selectWhere">
+        <where>
+            <if test="name != null">
+                AND name=#{name}
+            </if>
+            <if test="password != null">
+                AND password=#{password}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 数据总量 -->
+    <select id="getUserCount" resultType="int" parameterType="Map">
+        SELECT count(1)
+        FROM
+        user
+        <include refid="selectWhere"></include>
+    </select>
+
+    <!-- 查询列表 -->
+    <select id="getUserList" resultMap="userMap" parameterType="Map">
+        SELECT
+        id,name,password
+        FROM user
+        <include refid="selectWhere"></include>
+        LIMIT #{offset},#{limit}
+    </select>
+
+    <!-- 查询数据 -->
+    <select id="getUser" resultMap="userMap" parameterType="Integer">
+		SELECT
+        id,name,password
+		FROM user
+        WHERE id = #{id}
+	</select>
+
+    <delete id="deleteUser" parameterType="Integer">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+
+</mapper>

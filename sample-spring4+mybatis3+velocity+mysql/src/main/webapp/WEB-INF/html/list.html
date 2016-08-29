@@ -1,0 +1,33 @@
+#parse("header.html")
+
+<h1 class="page-header">管理员</h1>
+<a href="$rc.contextPath/getUser.do?id=$user.id" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> 新增</a>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+              	<th>password</th>
+              	<th></th>
+            </tr>
+		</thead>
+		<tbody>
+			#foreach($user in $dl.list)
+			<tr>
+				<td>$!user.id</td>
+				<td>$!user.name</td>
+              	<td>$!user.password</td>
+              	<td>
+              		<a href="$rc.contextPath/getUser.do?id=$user.id" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span>查看</a>
+              		<a href="$rc.contextPath/update.do?id=$user.id" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span>更新</a>
+              		<a href="$rc.contextPath/delete.do?id=$user.id" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span>删除</a>
+              	</td>
+            </tr>
+            #end
+		</tbody>
+	</table>
+</div>
+
+#parse("footer.html")
