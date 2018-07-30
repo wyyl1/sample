@@ -1,0 +1,19 @@
+#Default port is 8761
+server:
+  # Eureka服务将要监听的端口
+  port: 8761
+
+# 每次服务注册需要30秒的时间才能显示在Eureka服务中，因为Eureka需要从服务接收3次连续心跳包ping，
+# 每次心跳包ping间隔10秒，然后才能使用这个服务
+eureka:
+  client:
+    # 不要使用Eureka服务进注册
+    registerWithEureka: false
+    # 不要在本地缓存注册信息
+    fetchRegistry: false
+  server:
+    # 在服务器接收请求之前等待的初始时间（单位：分钟），默认值是5分钟
+    waitTimeInMsWhenSyncEmpty: 1
+  serviceUrl:
+    defaultZone: http://localhost:8761
+

@@ -1,0 +1,22 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      server:
+        encrypt.enabled: false
+        git:
+#          uri: https://github.com/carnellj/config-repo/
+#          searchPaths: licensingservice,organizationservice
+#          username: native-cloud-apps
+#          password: 0ffended
+
+          # 配置文件地址
+          uri: https://github.com/wyyl1/sample.git
+          # 扫描的路径
+          searchPaths: spring-cloud-config-test/config-repo/fruitservice
+          timeout: 60
+          # 多目录用逗号
+          # searchPaths: config-repo/licensingservice,config-repo/organizationservice
+#          username: spring
+#          password: a12345678

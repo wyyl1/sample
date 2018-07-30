@@ -1,0 +1,6 @@
+# 为了阅读方便在application.yml中配置
+#spring:
+#  application:
+#    name: airportservice
+
+

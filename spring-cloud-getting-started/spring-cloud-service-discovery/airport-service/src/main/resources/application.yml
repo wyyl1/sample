@@ -1,0 +1,16 @@
+spring:
+  application:
+    # 将使用Eureka注册的服务的逻辑名称
+    name: airportservice
+eureka:
+  instance:
+    # 注册服务的IP，而不是服务器名称
+    preferIpAddress: true
+  client:
+    # 向Eureka注册服务
+    registerWithEureka: true
+    # 拉取本地注册表的副本
+    fetchRegistry: true
+    serviceUrl:
+      # Eureka服务的位置
+      defaultZone: http://localhost:8761/eureka/

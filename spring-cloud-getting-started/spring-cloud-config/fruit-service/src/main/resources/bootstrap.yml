@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: fruitservice
+  profiles:
+    active:
+      # 可选环境 default dev prod
+      dev
+  cloud:
+    config:
+      # 配置服务器地址
+      uri: http://localhost:8888
